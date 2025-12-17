@@ -1,0 +1,181 @@
+/* ConcertMatch Styles */
+:root {
+    --bg-dark: #0a0a0a;
+    --card-bg: #1a1a1a;
+    --neon-pink: #ff00cc;
+    --neon-cyan: #00ffff;
+    --neon-purple: #bd00ff;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px var(--neon-purple); }
+    50% { box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-purple); }
+    100% { box-shadow: 0 0 10px var(--neon-purple); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Utilities */
+.container {
+    width: 100%;
+    max-width: 480px; /* Mobile width focus */
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-gradient {
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 0, 204, 0.4);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+
+/* Layout Compontents */
+header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    z-index: 100;
+}
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+nav a.active {
+    color: var(--neon-cyan);
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+}
+
+/* Profile specific */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-pink);
+    object-fit: cover;
+    margin-bottom: 15px;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Match Card */
+.match-card {
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.match-info {
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    width: 100%;
+    padding: 30px 20px 20px;
+}
+
+/* Connect Page */
+.connect-ring {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    margin: 50px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.connect-ring.active {
+    animation: pulse 2s infinite;
+    border-color: var(--neon-cyan);
+}
