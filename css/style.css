@@ -53,6 +53,7 @@ body {
 .title-gradient {
     background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
 }
@@ -119,6 +120,17 @@ nav a {
 
 nav a.active {
     color: var(--neon-cyan);
+}
+
+@media (max-width: 480px) {
+    nav a {
+        font-size: 0; /* Hide text */
+        justify-content: center;
+    }
+    nav a i {
+        font-size: 1.5rem; /* Ensure icons are visible and larger */
+        margin-bottom: 0;
+    }
 }
 
 /* Cards */

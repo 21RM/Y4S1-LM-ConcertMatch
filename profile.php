@@ -60,23 +60,9 @@ $user = [
             </div>
         </div>
 
-        <h3 style="margin: 10px 0;">My Concert Memories</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div style="background: #222; border-radius: 10px; height: 120px; display: flex; align-items: center; justify-content: center; border: 2px dashed #444; cursor: pointer;">
-                <div style="text-align: center; color: #666;">
-                    <i class="fa-solid fa-plus" style="font-size: 2rem;"></i><br>Add
-                </div>
-            </div>
-            <?php foreach ($user['media'] as $media): ?>
-                <div style="position: relative; height: 120px; border-radius: 10px; overflow: hidden;">
-                    <img src="<?php echo $media['thumb']; ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                    <?php if($media['type'] === 'video'): ?>
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; background: rgba(0,0,0,0.5); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-play" style="font-size: 0.8rem;"></i>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+        <div class="card" style="text-align: center; margin-top: 20px; cursor: pointer;" onclick="window.location='archive.php'">
+            <h3 style="color: var(--neon-purple); margin-bottom: 15px;"><i class="fa-solid fa-box-archive"></i> Concert Archive</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">View your timeline of gigs ➜</p>
         </div>
     </div>
 
