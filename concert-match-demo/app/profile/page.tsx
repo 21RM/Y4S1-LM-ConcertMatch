@@ -1,6 +1,5 @@
-import { Syne } from "next/font/google";
 import BottomNav from "../components/BottomNav";
-
+import { DotGothic16, Space_Mono, Syne } from "next/font/google";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -8,10 +7,22 @@ const syne = Syne({
   display: "swap",
 });
 
+const dotGothic = DotGothic16({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
 export default function ProfilePage() {
   return (
-    <main className="min-h-dvh text-white">
-      {/* Background image exported from Figma */}
+    <main className="h-[100svh] overflow-hidden text-white">
+      {/* Background image */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <img
           src="/bg/profile.png"
@@ -23,18 +34,20 @@ export default function ProfilePage() {
       </div>
 
       {/* Phone container */}
-      <div className="relative mx-auto min-h-dvh max-w-[420px]">
-        {/* Content */}
-        <div className="px-6 pt-10 pb-28">
-          {/* Name + bio */}
+      <div className="relative mx-auto h-[100svh] max-w-[420px] overflow-hidden">
+        {/* Scrollable content (only scrolls if needed) */}
+        <div className={`${dotGothic.className} h-full overflow-y-auto px-6 pt-10 pb-28`}>
+          {/* Name + handle + bio */}
           <div>
-            <h1
-              className={`${syne.className} text-[56px] leading-[0.95] font-medium tracking-tight`}
-            >
+            <h1 className={`${syne.className} text-[56px] leading-[0.95] font-medium tracking-tight`}>
               Maria
               <br />
               Rocha
             </h1>
+
+            <div className={`${spaceMono.className} mt-2 text-[13px] text-white/70`}>
+              @maria_rocha
+            </div>
 
             <p className="mt-4 max-w-[260px] text-[13px] leading-5 text-white/70">
               Sunny beaches and marisque.
@@ -43,10 +56,8 @@ export default function ProfilePage() {
             </p>
           </div>
 
-          {/* Divider */}
           <div className="mt-7 h-px w-full bg-white/20" />
 
-          {/* Next event */}
           <section className="pt-4">
             <h2 className="text-[14px] text-white/85">next event</h2>
             <p className="mt-2 text-[12px] tracking-wide text-white/70">
@@ -54,17 +65,14 @@ export default function ProfilePage() {
             </p>
           </section>
 
-          {/* Divider */}
           <div className="mt-5 h-px w-full bg-white/20" />
 
-          {/* Friends */}
           <section className="pt-4">
             <h2 className="text-[14px] text-white/85">friends</h2>
             <div className="mt-3 h-11 w-28 rounded-2xl bg-white" />
           </section>
 
-          {/* Top songs & artists */}
-          <section className="pt-6">
+          <section className="pt-5">
             <h2 className="text-[14px] text-white/85">top songs and artists</h2>
             <div className="mt-3 flex gap-3">
               <div className="h-11 w-28 rounded-2xl bg-white" />
@@ -72,11 +80,8 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          {/* Personal recommendations */}
-          <section className="pt-6">
-            <h2 className="text-[14px] text-white/85">
-              personal recommendations
-            </h2>
+          <section className="pt-5">
+            <h2 className="text-[14px] text-white/85">personal recommendations</h2>
             <div className="mt-3 grid grid-cols-3 gap-3">
               <div className="h-11 rounded-2xl bg-white" />
               <div className="h-11 rounded-2xl bg-white" />
@@ -84,8 +89,7 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          {/* Photos & videos */}
-          <section className="pt-6">
+          <section className="pt-5">
             <h2 className="text-[14px] text-white/85">photos &amp; videos</h2>
             <div className="mt-3 grid grid-cols-3 gap-3">
               <div className="h-28 rounded-2xl bg-white" />
