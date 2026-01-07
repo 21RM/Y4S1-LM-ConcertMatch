@@ -39,10 +39,10 @@ def calculate_music_score(user_a, user_b):
 
 def calculate_location_factor(distance_km):
     # < 20km = 1.0
-    # > 200km = 0.0
+    # > 500km = 0.0
     # Linear decay
     min_dist = 20
-    max_dist = 200
+    max_dist = 500
     
     if distance_km <= min_dist:
         return 1.0

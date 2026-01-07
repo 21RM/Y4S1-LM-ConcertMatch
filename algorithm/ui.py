@@ -30,7 +30,7 @@ except FileNotFoundError:
 
 # User Selection
 user_options = {u["name"]: u["id"] for u in users}
-selected_name = st.selectbox("Select Target User", options=list(user_options.keys()))
+selected_name = st.selectbox("Select Target User", options=sorted(user_options.keys()))
 selected_id = user_options[selected_name]
 
 if selected_id:

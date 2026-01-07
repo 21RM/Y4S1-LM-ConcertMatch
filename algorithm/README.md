@@ -20,6 +20,11 @@ streamlit run algorithm/ui.py
 ```
 *Note: Make sure to run this from the project root.*
 
+### Helper Scripts
+We provide helper scripts to launch the UI easily:
+- **Windows**: Double-click `algorithm/run_ui.bat`.
+- **Linux/macOS**: Run `./algorithm/run_ui.sh`.
+
 ### Command Line Scripts
 You can also run the scripts individually:
 
@@ -46,13 +51,13 @@ $$
 *Where $A$ is the set of Artists and $G$ is the set of Genres.*
 
 ### 2. Location Factor ($L(d)$)
-Proximity acts as a decay factor. Users share a "perfect" location score if they are within 20km. This decays linearly until 200km, after which the factor is 0.
+Proximity acts as a decay factor. Users share a "perfect" location score if they are within 20km. This decays linearly until 500km, after which the factor is 0.
 
 $$
 L(d) =
 \begin{cases}
 1 & \text{if } d \le 20\text{km} \\
-\max(0, 1 - \frac{d - 20}{180}) & \text{if } d > 20\text{km}
+\max(0, 1 - \frac{d - 20}{480}) & \text{if } d > 20\text{km}
 \end{cases}
 $$
 
