@@ -47,7 +47,7 @@ $$
 S_{\text{music}} = 0.7 \cdot \frac{|A_1 \cap A_2|}{|A_1 \cup A_2|} + 0.3 \cdot \frac{|G_1 \cap G_2|}{|G_1 \cup G_2|}
 $$
 
-*Where $A$ is the set of Artists and $G$ is the set of Genres.*
+Where $A$ is the set of Artists and $G$ is the set of Genres.
 
 ### 2. Location Factor ($L(d)$)
 Proximity acts as a decay factor. Users share a "perfect" location score if they are within 20km. This decays linearly until 500km, after which the factor is 0.
