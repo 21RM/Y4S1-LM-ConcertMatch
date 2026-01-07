@@ -7,7 +7,7 @@ This directory contains the mock algorithm implementation for ConcertMatch.
 You need Python 3 installed. The UI requires the following libraries:
 
 ```bash
-pip install streamlit pandas
+pip install -r requirements.txt
 ```
 
 ## How to Run
@@ -16,25 +16,24 @@ pip install streamlit pandas
 The easiest way to explore the data and algorithm is using the Streamlit dashboard:
 
 ```bash
-streamlit run algorithm/ui.py
+streamlit run ui.py
 ```
-*Note: Make sure to run this from the project root.*
 
 ### Helper Scripts
 We provide helper scripts to launch the UI easily:
-- **Windows**: Double-click `algorithm/run_ui.bat`.
-- **Linux/macOS**: Run `./algorithm/run_ui.sh`.
+- **Windows**: Double-click `run_ui.bat`.
+- **Linux/macOS**: Run `./run_ui.sh`.
 
 ### Command Line Scripts
 You can also run the scripts individually:
 
 - **Generate Data**: Defaults to 100,000 mock users.
   ```bash
-  python3 algorithm/generate_data.py
+  python3 generate_data.py
   ```
 - **Match Users**: Runs matching for the first user in the database.
   ```bash
-  python3 algorithm/match_users.py [optional_user_id]
+  python3 match_users.py [optional_user_id]
   ```
 
 ## Algorithm Logic
