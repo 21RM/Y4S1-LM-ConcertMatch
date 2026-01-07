@@ -10,28 +10,35 @@ NUM_USERS = 100000
 OUTPUT_FILE = os.path.join(os.path.dirname(__file__), "users.json")
 
 # Mock Data Pools
-ARTISTS = [
+ARTISTS = {
     # Pop
-    "Taylor Swift", "Harry Styles", "Dua Lipa", "The Weeknd", "Olivia Rodrigo",
-    "Billie Eilish", "Ariana Grande", "Lady Gaga", "Beyoncé", "Rihanna",
+    "Taylor Swift": ["Pop"], "Harry Styles": ["Pop", "Rock"], "Dua Lipa": ["Pop", "Electronic"], 
+    "The Weeknd": ["Pop", "R&B"], "Olivia Rodrigo": ["Pop", "Rock"],
+    "Billie Eilish": ["Pop", "Alternative"], "Ariana Grande": ["Pop", "R&B"], 
+    "Lady Gaga": ["Pop", "Electronic"], "Beyoncé": ["R&B", "Pop"], "Rihanna": ["R&B", "Pop"],
     # Rock / Alt
-    "Arctic Monkeys", "The Strokes", "Fontaines D.C.", "Radiohead", "Nirvana",
-    "Queen", "The Beatles", "Pink Floyd", "Red Hot Chili Peppers",
+    "Arctic Monkeys": ["Rock", "Indie Rock"], "The Strokes": ["Rock", "Indie Rock"], 
+    "Fontaines D.C.": ["Post-Punk", "Indie Rock"], "Radiohead": ["Alternative", "Rock"], 
+    "Nirvana": ["Rock", "Grunge"], "Queen": ["Rock"], "The Beatles": ["Rock", "Pop"], 
+    "Pink Floyd": ["Rock", "Progressive Rock"], "Red Hot Chili Peppers": ["Rock", "Funk"],
     # Indie
-    "Phoebe Bridgers", "Tame Impala", "Beach House", "Clairo", "Mitski",
-    "Sufjan Stevens", "Bon Iver", "Vampire Weekend",
+    "Phoebe Bridgers": ["Indie Folk", "Alternative"], "Tame Impala": ["Psych Rock", "Indie Rock"], 
+    "Beach House": ["Dream Pop", "Indie Rock"], "Clairo": ["Lo-Fi", "Pop"], 
+    "Mitski": ["Indie Rock", "Alternative"], "Sufjan Stevens": ["Indie Folk", "Alternative"], 
+    "Bon Iver": ["Indie Folk", "Alternative"], "Vampire Weekend": ["Indie Rock", "Pop"],
     # Hip Hop
-    "Kendrick Lamar", "Drake", "Travis Scott", "Kanye West", "Tyler, The Creator",
-    "Frank Ocean", "A$AP Rocky", "J. Cole",
+    "Kendrick Lamar": ["Hip Hop"], "Drake": ["Hip Hop", "R&B"], "Travis Scott": ["Hip Hop"], 
+    "Kanye West": ["Hip Hop"], "Tyler, The Creator": ["Hip Hop", "R&B"],
+    "Frank Ocean": ["R&B", "Soul"], "A$AP Rocky": ["Hip Hop"], "J. Cole": ["Hip Hop"],
     # Electronic
-    "Fred again..", "Daft Punk", "Jamie xx", "Disclosure", "Four Tet",
-    "Aphex Twin", "Kaytranada"
-]
+    "Fred again..": ["House", "Electronic"], "Daft Punk": ["Electronic", "House"], 
+    "Jamie xx": ["Electronic", "UK Garage"], "Disclosure": ["House", "Pop"], 
+    "Four Tet": ["Electronic", "Ambient"], "Aphex Twin": ["IDM", "Electronic"], 
+    "Kaytranada": ["Electronic", "Hip Hop"]
+}
 
-GENRES = [
-    "Pop", "Rock", "Indie Rock", "Alternative", "Hip Hop", "R&B", 
-    "Electronic", "House", "Techno", "Jazz", "Folk", "Metal", "Punk"
-]
+# Derived from above
+ALL_ARTIST_NAMES = list(ARTISTS.keys())
 
 CITIES = [
     {"name": "Lisbon", "lat": 38.7223, "lon": -9.1393},
@@ -40,7 +47,17 @@ CITIES = [
     {"name": "Faro", "lat": 37.0179, "lon": -7.9308},
     {"name": "Braga", "lat": 41.5454, "lon": -8.4265},
     {"name": "Aveiro", "lat": 40.6405, "lon": -8.6538},
-    {"name": "Evora", "lat": 38.5714, "lon": -7.9135}
+    {"name": "Evora", "lat": 38.5714, "lon": -7.9135},
+    {"name": "Setúbal", "lat": 38.5244, "lon": -8.8882},
+    {"name": "Leiria", "lat": 39.7438, "lon": -8.8078},
+    {"name": "Viseu", "lat": 40.6566, "lon": -7.9125},
+    {"name": "Viana do Castelo", "lat": 41.6918, "lon": -8.8344},
+    {"name": "Guimarães", "lat": 41.4425, "lon": -8.2918},
+    {"name": "Castelo Branco", "lat": 39.8197, "lon": -7.4969},
+    {"name": "Guarda", "lat": 40.5373, "lon": -7.2658},
+    {"name": "Beja", "lat": 38.0175, "lon": -7.8687},
+    {"name": "Santarém", "lat": 39.2333, "lon": -8.6833},
+    {"name": "Vila Real", "lat": 41.3012, "lon": -7.7471}
 ]
 
 FIRST_NAMES = ["Maria", "João", "Ana", "Pedro", "Sofia", "Tiago", "Beatriz", "Diogo", "Mariana", "Gonçalo", "Inês", "Lucas", "Rita", "Miguel"]
@@ -56,12 +73,20 @@ def generate_user():
     lon_offset = random.uniform(-0.04, 0.04)
     
     num_artists = random.randint(3, 10)
-    users_artists = random.sample(ARTISTS, num_artists)
+    users_artists = random.sample(ALL_ARTIST_NAMES, num_artists)
     
-    # Infer genres from artists (simplified) or just pick random genres
-    # For this mock, we'll pick random genres heavily weighted? No, just random.
-    num_genres = random.randint(2, 5)
-    users_genres = random.sample(GENRES, num_genres)
+    # Infer genres from artists
+    genre_counts = {}
+    for artist in users_artists:
+        for genre in ARTISTS[artist]:
+            genre_counts[genre] = genre_counts.get(genre, 0) + 1
+            
+    # Sort genres by frequency
+    sorted_genres = sorted(genre_counts.items(), key=lambda x: x[1], reverse=True)
+    
+    # Pick top 2-5 genres
+    num_genres = min(len(sorted_genres), random.randint(2, 5))
+    users_genres = [g[0] for g in sorted_genres[:num_genres]]
 
     return {
         "id": str(uuid.uuid4()),
