@@ -36,8 +36,8 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="absolute bottom-0 left-0 right-0 border-t border-white/20 bg-zinc-950/70 backdrop-blur">
-      <div className="mx-auto max-w-[420px] px-4 py-3">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/20 bg-zinc-950/70 backdrop-blur">
+      <div className="mx-auto max-w-[420px] px-4 py-3 pb-[calc(env(safe-area-inset-bottom,0px)+0.75rem)]">
         <div className="flex items-center justify-between">
           {NAV.map((item) => {
             const active = isActive(pathname, item);
@@ -63,4 +63,5 @@ export default function BottomNav() {
       </div>
     </nav>
   );
+
 }
