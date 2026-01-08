@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import generate_data
 import match_users
+from collections import Counter
 
 st.set_page_config(page_title="ConcertMatch Algorithm Debugger", layout="wide")
 
@@ -29,9 +30,20 @@ except FileNotFoundError:
     st.stop()
 
 # User Selection
-user_options = {u["name"]: u["id"] for u in users}
-selected_name = st.selectbox("Select Target User", options=sorted(user_options.keys()))
-selected_id = user_options[selected_name]
+name_counts = Counter(u["name"] for u in users)
+user_options = {}
+
+for u in users:
+    if name_counts[u["name"]] > 1:
+        # Append ID if name is duplicated
+        label = f"{u['name']} ({u['id']})"
+    else:
+        label = u['name']
+    user_options[label] = u['id']
+
+# Sort alphabetically (this implicitly sorts by Name, then ID for duplicates)
+selected_option = st.selectbox("Select Target User", options=sorted(user_options.keys()))
+selected_id = user_options[selected_option]
 
 if selected_id:
     target_user, matches = match_users.find_matches_data(selected_id, users_data=users)
